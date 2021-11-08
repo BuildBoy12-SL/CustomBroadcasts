@@ -26,9 +26,9 @@ namespace CustomBroadcasts
         /// <summary>
         /// Gets or sets a collection of all broadcasts to use.
         /// </summary>
-        public Dictionary<Event, ConfigurableBroadcast[]> Broadcasts { get; set; } = new Dictionary<Event, ConfigurableBroadcast[]>
+        public Dictionary<EventType, ConfigurableBroadcast[]> Broadcasts { get; set; } = new Dictionary<EventType, ConfigurableBroadcast[]>
         {
-            [Event.RoundStarted] = new[]
+            [EventType.RoundStarted] = new[]
             {
                 new ConfigurableBroadcast
                 {

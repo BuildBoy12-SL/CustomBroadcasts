@@ -40,7 +40,7 @@ namespace CustomBroadcasts
 
         private void OnRoundStart()
         {
-            plugin.FireBroadcasts(Event.RoundStarted);
+            plugin.FireBroadcasts(EventType.RoundStarted);
         }
     }
 }

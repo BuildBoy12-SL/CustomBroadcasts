@@ -22,11 +22,6 @@ namespace CustomBroadcasts
         private readonly List<CoroutineHandle> coroutines = new List<CoroutineHandle>();
         private EventHandlers eventHandlers;
 
-        /// <summary>
-        /// Gets a static instance of the <see cref="Plugin"/> class.
-        /// </summary>
-        public static Plugin Instance { get; private set; }
-
         /// <inheritdoc />
         public override string Author { get; } = "Build";
 
@@ -45,7 +40,6 @@ namespace CustomBroadcasts
         /// <inheritdoc/>
         public override void OnEnabled()
         {
-            Instance = this;
             eventHandlers = new EventHandlers(this);
             eventHandlers.Subscribe();
             base.OnEnabled();
@@ -56,17 +50,16 @@ namespace CustomBroadcasts
         {
             eventHandlers.Unsubscribe();
             eventHandlers = null;
-            Instance = null;
             base.OnDisabled();
         }
 
         /// <summary>
         /// Fires a broadcast event.
         /// </summary>
-        /// <param name="eventType">The event to fire.</param>
-        public void FireBroadcasts(Event eventType)
+        /// <param name="eventTypeType">The event to fire.</param>
+        public void FireBroadcasts(EventType eventTypeType)
         {
-            if (!Config.Broadcasts.TryGetValue(eventType, out ConfigurableBroadcast[] broadcasts))
+            if (!Config.Broadcasts.TryGetValue(eventTypeType, out ConfigurableBroadcast[] broadcasts))
                 return;
 
             foreach (ConfigurableBroadcast broadcast in broadcasts)
