@@ -19,6 +19,19 @@ namespace CustomBroadcasts
         /// <inheritdoc/>
         public bool IsEnabled { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether debug messages should be shown.
+        /// </summary>
+        public bool ShowDebug { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether hints should be used instead of broadcasts.
+        /// </summary>
+        public bool UseHints { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets a collection of all broadcasts to use.
+        /// </summary>
         public Dictionary<Event, ConfigurableBroadcast[]> Broadcasts { get; set; } = new Dictionary<Event, ConfigurableBroadcast[]>
         {
             [Event.RoundStarted] = new[]

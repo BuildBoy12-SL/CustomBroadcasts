@@ -76,8 +76,17 @@ namespace CustomBroadcasts
 
                 coroutines.Add(Timing.CallDelayed(broadcast.Delay, () =>
                 {
+                    Log.Debug($"Firing broadcast \"{broadcast.Name}\".", Config.ShowDebug);
                     foreach (Player player in Player.List)
+                    {
+                        if (Config.UseHints)
+                        {
+                            player.ShowHint(broadcast.Broadcast.Content.Replace("{Name}", player.Nickname), broadcast.Broadcast.Duration);
+                            continue;
+                        }
+
                         player.Broadcast(broadcast.Broadcast.Duration, broadcast.Broadcast.Content.Replace("{Name}", player.Nickname), broadcast.Broadcast.Type, broadcast.OverrideBroadcast);
+                    }
                 }));
             }
         }
