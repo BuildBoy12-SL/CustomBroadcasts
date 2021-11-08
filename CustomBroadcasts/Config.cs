@@ -10,7 +10,6 @@ namespace CustomBroadcasts
     using System.Collections.Generic;
     using CustomBroadcasts.Enums;
     using CustomBroadcasts.Models;
-    using Exiled.API.Features;
     using Exiled.API.Interfaces;
 
     /// <inheritdoc cref="IConfig"/>
@@ -25,11 +24,6 @@ namespace CustomBroadcasts
         public bool ShowDebug { get; set; } = false;
 
         /// <summary>
-        /// Gets or sets a value indicating whether hints should be used instead of broadcasts.
-        /// </summary>
-        public bool UseHints { get; set; } = false;
-
-        /// <summary>
         /// Gets or sets a collection of all broadcasts to use.
         /// </summary>
         public Dictionary<Event, ConfigurableBroadcast[]> Broadcasts { get; set; } = new Dictionary<Event, ConfigurableBroadcast[]>
@@ -40,13 +34,15 @@ namespace CustomBroadcasts
                 {
                     Name = "Rules",
                     Delay = 0,
-                    Broadcast = new Broadcast("Please read our rules!", 5),
+                    Content = "Please read our rules!",
+                    Duration = 5,
                 },
                 new ConfigurableBroadcast
                 {
                     Name = "Eggs",
                     Delay = 5,
-                    Broadcast = new Broadcast("Hello fellow egg {Name}"),
+                    Content = "Hello, {Name}",
+                    Duration = 10,
                 },
             },
         };

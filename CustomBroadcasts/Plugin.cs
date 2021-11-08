@@ -71,7 +71,7 @@ namespace CustomBroadcasts
 
             foreach (ConfigurableBroadcast broadcast in broadcasts)
             {
-                if (!broadcast.Broadcast.Show)
+                if (!broadcast.Show)
                     continue;
 
                 coroutines.Add(Timing.CallDelayed(broadcast.Delay, () =>
@@ -79,13 +79,13 @@ namespace CustomBroadcasts
                     Log.Debug($"Firing broadcast \"{broadcast.Name}\".", Config.ShowDebug);
                     foreach (Player player in Player.List)
                     {
-                        if (Config.UseHints)
+                        if (broadcast.DisplayType == DisplayType.Hint)
                         {
-                            player.ShowHint(broadcast.Broadcast.Content.Replace("{Name}", player.Nickname), broadcast.Broadcast.Duration);
+                            player.ShowHint(broadcast.Content.Replace("{Name}", player.Nickname), broadcast.Duration);
                             continue;
                         }
 
-                        player.Broadcast(broadcast.Broadcast.Duration, broadcast.Broadcast.Content.Replace("{Name}", player.Nickname), broadcast.Broadcast.Type, broadcast.OverrideBroadcast);
+                        player.Broadcast(broadcast.Duration, broadcast.Content.Replace("{Name}", player.Nickname), global::Broadcast.BroadcastFlags.Normal, broadcast.OverrideBroadcast);
                     }
                 }));
             }
